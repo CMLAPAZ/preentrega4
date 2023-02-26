@@ -1,0 +1,172 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+header img {
+  max-width: 50%;
+}
+
+
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.button-group button {
+  margin: 0 10px;
+}
+
+button {
+  display: flex;
+  background-color: #50cb96;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #a1f195;
+}
+
+#terminar-btn {
+  float: right;
+  margin-top: 10px;
+}
+
+
+
+/* Ajustar el padding de las celdas */
+#tabla-empleados td {
+  width: 15%;
+  padding: 8px;
+  border-spacing: 10px 5px;
+  text-align: left;
+  border-bottom: 1px solid #1a99e8;
+}
+
+#tabla-empleados th {
+  width: 15%;
+  text-align: left;
+  padding: 8px;
+  border-spacing: 10px 5px;
+  overflow: auto;
+  background-color: #1275ed;
+  color: rgb(255, 255, 255);
+}
+
+
+/* Estilos para los inputs */
+table input[type="text"] {
+  width: 90%;
+  padding: 6px 10px;
+  margin: 4px 0;
+  border-spacing: 10px 5px;
+  border: 2px solid #315de3;
+  border-radius: 4px;
+}
+table input[type="string"] {
+  float: left;
+  width: 70%;
+  padding: 6px 10px;
+  margin: 4px 0;
+ 
+  border-spacing: 10px 5px;
+  border: 2px solid #315de3;
+  border-radius: 4px;
+}
+
+ 
+table input[id^="sexo-"] {
+  width: 50px;
+}
+
+
+
+
+.contenedor-mensaje {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mensaje-despedida {
+  font-size: 5rem;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+  animation: mensaje-despedida 1s ease-in-out;
+}
+
+@keyframes mensaje-despedida {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.confeti {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.confeti-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: confeti-fall 2s ease-in-out infinite;
+}
+
+@keyframes confeti-fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
