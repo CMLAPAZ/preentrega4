@@ -111,12 +111,9 @@ function agregarFormulario1() {
 
     ocultarBotones();
 
-
     // manejar el envío del formulario
     formulario.addEventListener('submit', function (event) {
         event.preventDefault();
-
-
 
         // crear el objeto empleado con los datos del formulario
         const form = event.target;
@@ -137,13 +134,7 @@ function agregarFormulario1() {
         const mes = (fechaIng.getMonth() + 1).toString().padStart(2, '0');
         const anio = fechaIng.getFullYear().toString();
         celdaFechaIng.textContent = `${dia}/${mes}/${anio}`;
-
-
         empleado.fecha_ing = celdaFechaIng.textContent;
-        alert(empleado.fecha_ing);
-
-
-
 
         const celdaFechaNac = document.createElement('td');
         const fechaNac = new Date(empleado.fecha_nac);
@@ -156,12 +147,16 @@ function agregarFormulario1() {
         empleado.fecha_nac = celdaFechaNac.textContent;
         alert(empleado.fecha_nac);
 
+        //si no hay datos existentes en localStorage, se creará un array vacío.
+        var lista_empleados = JSON.parse(localStorage.getItem("lista_empleados")) || [];
+
         // agregar el objeto empleado al arreglo lista_empleados
         lista_empleados.push(empleado);
 
         // guardar la lista de empleados en el almacenamiento local
         const listaJSON = JSON.stringify(lista_empleados);
         localStorage.setItem('lista_empleados', listaJSON);
+        localStorage.setItem("lista_empleados", JSON.stringify(lista_empleados));
 
         // agregar fila a la tabla
         const tabla = document.querySelector('#tabla-empleados');
@@ -177,10 +172,8 @@ function agregarFormulario1() {
         <td>${empleado.fecha_nac}</td>
         
       `;
-        alert(tabla);
+
         tabla.appendChild(fila);
-
-
 
         // limpiar el formulario
         form.reset();
@@ -189,13 +182,17 @@ function agregarFormulario1() {
     });
 }
 
+
 function modificarEmpleado() {
 
     const listaJSON = localStorage.getItem('lista_empleados');
+
     if (listaJSON) {
+
         const lista_empleados = JSON.parse(listaJSON);
         const tabla = document.createElement('table');
         tabla.id = 'tabla-empleados';
+
         for (let i = 0; i < lista_empleados.length; i++) {
             const empleado = lista_empleados[i];
             const fila = document.createElement('tr');
@@ -251,7 +248,6 @@ function modificarEmpleado() {
 
 function terminarbt() {
 
-
     // Verificar si el botón con ID "terminar-btn" existe
     var botonExistente = document.getElementById("terminar-btn");
 
@@ -264,6 +260,7 @@ function terminarbt() {
 
         // Agregar botón al final del div formulario-container
         var formularioExistente = document.getElementById("formulario");
+        
         if (!formularioExistente) {
             formulario.appendChild(terminarBtn);
             terminarBtn.addEventListener("click", terminar);
@@ -285,43 +282,42 @@ function ocultarBotones() {
     }
 }
 
-
-
-
-
 function guardarEmpleado(index) {
+
     const nuevoNombre = document.getElementById(`nombre-${index}`).value;
     const nuevoApellido = document.getElementById(`apellido-${index}`).value;
     const nuevoDNI = document.getElementById(`dni-${index}`).value;
     const nuevoSexo = document.getElementById(`sexo-${index}`).value;
     const nuevaFechaIngreso = document.getElementById(`fecha-ingreso-${index}`).value;
-    const nuevaFechaNacimiento = document.getElementById(`fecha-nacimiento-${index}`).value;
+    
 
-    if (nuevoNombre && nuevoApellido && nuevoDNI && nuevoSexo && nuevaFechaIngreso && nuevaFechaNacimiento) {
+    
+  
+
+    if (nuevoNombre && nuevoApellido && nuevoDNI && nuevoSexo && nuevaFechaIngreso && nuevaFechaNac) {
+        
         const listaJSON = localStorage.getItem('lista_empleados');
         if (listaJSON) {
             const lista_empleados = JSON.parse(listaJSON);
+
             lista_empleados[index] = {
                 nombre: nuevoNombre,
                 apellido: nuevoApellido,
                 dni: nuevoDNI,
                 sexo: nuevoSexo,
-                fechaIngreso: nuevaFechaIngreso,
-                fechaNacimiento: nuevaFechaNacimiento
+                fechaIngreso: nuevaFechaIngreso1,
+                fechaNacimiento: nuevaFechaNac1
             };
 
 
             localStorage.setItem('lista_empleados', JSON.stringify(lista_empleados));
 
-
-
             location.reload(); // Recargar la página para reflejar los cambios
         }
-
-
     }
-
 }
+
+  
 
 function eliminarEmpleado(index) {
     const confirmacion = confirm('¿Está seguro de que desea eliminar este empleado?');
