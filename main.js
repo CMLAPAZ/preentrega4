@@ -128,23 +128,24 @@ function agregarFormulario1() {
         //const fila1 = document.createElement('tr');
 
         // Crear una celda para la fecha de ingreso y asignarle el valor formateado
-        const celdaFechaIng = document.createElement('td');
+        //const celdaFechaIng = document.createElement('td');
         const fechaIng = new Date(empleado.fecha_ing);
         const dia = (fechaIng.getDate() + 1).toString().padStart(2, '0');
+        alert(typeof(dia));
         const mes = (fechaIng.getMonth() + 1).toString().padStart(2, '0');
         const anio = fechaIng.getFullYear().toString();
-        celdaFechaIng.textContent = `${dia}/${mes}/${anio}`;
-        empleado.fecha_ing = celdaFechaIng.textContent;
-
-        const celdaFechaNac = document.createElement('td');
+        const celdaFechaIng = `${dia}/${mes}/${anio}`;
+        empleado.fecha_ing = celdaFechaIng;
+        
+        //const celdaFechaNac = document.createElement('td');
         const fechaNac = new Date(empleado.fecha_nac);
         const dian = (fechaNac.getDate() + 1).toString().padStart(2, '0');
         const mesn = (fechaNac.getMonth() + 1).toString().padStart(2, '0');
         const anion = fechaNac.getFullYear().toString();
-        celdaFechaNac.textContent = `${dian}/${mesn}/${anion}`;
+        const celdaFechaNac=`${dian}/${mesn}/${anion}`;
 
 
-        empleado.fecha_nac = celdaFechaNac.textContent;
+        empleado.fecha_nac = celdaFechaNac;
         alert(empleado.fecha_nac);
 
         //si no hay datos existentes en localStorage, se creará un array vacío.
@@ -289,10 +290,7 @@ function guardarEmpleado(index) {
     const nuevoDNI = document.getElementById(`dni-${index}`).value;
     const nuevoSexo = document.getElementById(`sexo-${index}`).value;
     const nuevaFechaIngreso = document.getElementById(`fecha-ingreso-${index}`).value;
-    
-
-    
-  
+    const nuevaFechaNac = document.getElementById(`fecha-nacimiento-${index}`).value;
 
     if (nuevoNombre && nuevoApellido && nuevoDNI && nuevoSexo && nuevaFechaIngreso && nuevaFechaNac) {
         
@@ -305,11 +303,11 @@ function guardarEmpleado(index) {
                 apellido: nuevoApellido,
                 dni: nuevoDNI,
                 sexo: nuevoSexo,
-                fechaIngreso: nuevaFechaIngreso1,
-                fechaNacimiento: nuevaFechaNac1
+                fecha_ing: nuevaFechaIngreso,
+                fecha_nac: nuevaFechaNac
             };
 
-
+            
             localStorage.setItem('lista_empleados', JSON.stringify(lista_empleados));
 
             location.reload(); // Recargar la página para reflejar los cambios
